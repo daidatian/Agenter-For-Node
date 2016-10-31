@@ -1,0 +1,45 @@
+{
+    "config": {
+        "tb_http": {
+            "namespace": "",
+            "description": "淘宝接口",
+            "version": "1.0",
+            "protocol": "http",
+            "host": "s.m.taobao.com",
+            "port": "80"
+        },
+        "tb_https": {
+            "namespace": "",
+            "description": "淘宝接口2",
+            "version": "1.0",
+            "protocol": "https",
+            "host": "s.m.taobao.com",
+            "port": "443"
+        }
+    },
+    "interfaces": [
+        {
+            "config": "tb_http",
+            "method": "GET", 
+            "description": "主搜索接口",
+            "action": "/client/search.do",
+            "localAction": "/client/search.do",
+            "id": "Search.getItems1",
+            "type": "JSON",
+            "sendMode": "defaultMode",
+            "monitor": false
+        }, {
+            "config": "tb_https",
+            "method": "GET", 
+            "description": "主搜索接口",
+            "action": "/client/search.do",
+            "localAction": "/client/search.dos",
+            "id": "Search.getItems2",
+            "type": "JSON",
+            "sendMode": "setCkMode",
+            "monitor": true
+        }
+    ]
+}
+
+

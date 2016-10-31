@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/css/style.css' />
+  </head>
+  <body>
+    <div class = "container">
+        <%
+            var list = json?json.data.categoryList:[];
+            var list2 = json2?json2.data.categoryList:[];
+            var nullMsg = '暂无数据';
+        %>
+        <div class="table-responsive">
+            <table class="table">
+            <tr>
+                <th>分类编号</th>
+                <th>名称</th>
+                <th>数量</th>
+                <th>操作</th>
+                <th>备注</th>
+            </tr>
+            <% list.forEach(function(item){ %>
+            <tr>
+                <td><%=item.categoryId||nullMsg %></td>
+                <td><%=item.name||nullMsg %></td>
+                <td><%=item.auctionCount||nullMsg %></td>
+                <td><a class="button button-info">确认</a></td>
+                <td>暂无操作</td>
+            </tr>
+            <%})%>
+            </table>
+        </div>
+        <div class="table-responsive">
+            <table class="table">
+            <tr>
+                <th>分类编号2</th>
+                <th>名称2</th>
+                <th>数量2</th>
+                <th>操作2</th>
+                <th>备注2</th>
+            </tr>
+            <% list2.forEach(function(item){ %>
+            <tr>
+                <td><%=item.categoryId %></td>
+                <td><%=item.name %></td>
+                <td><%=item.auctionCount %></td>
+                <td><a class="button button-info">确认</a></td>
+                <td>暂无操作</td>
+            </tr>
+            <%})%>
+            </table>
+        </div>
+    </div>
+    <script type="text/javascript" src="/plugins/jQuery/jquery.min.js"></script>
+    <script type="text/javascript">
+    $(function(){
+        $.post('/client/search.do', {q: 0}, function(data){
+            console.log('success')
+        });
+        $.post('/client/search.dos', {q: 1}, function(data){
+            console.log('success')
+        });
+    })
+    </script>
+  </body>
+</html>
+
