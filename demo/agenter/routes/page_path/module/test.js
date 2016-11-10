@@ -5,7 +5,7 @@
 module.exports = function(app){
 
 	// 后台渲染测试页
-	router.get('/test', function(req, res) {
+	router.get('/', function(req, res) {
 		// 缓存Id + 多个请求
 		ModalApi('test', req, [{
 			id: "Search.getItems1",
