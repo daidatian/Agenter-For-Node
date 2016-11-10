@@ -12,11 +12,15 @@ var httpUtils = require('./httpClientUtils');
  */
 var transfer = function(setting, req, callback) {
     var options = setting || {};
-    options.headers = options.headers || {};
-    // 转发用户信息
-    if (req.headers['cookie']) {
-        options.headers['Cookie'] = req.headers['cookie'];
+    var hds = setting.headers || {}; // 文档配置的headers
+    for (var i in hds) {
+        req.headers[i] = hds[i];
     }
+    options.headers = req.headers;
+    // 转发用户信息
+    // if (req.headers['cookie']) {
+    //     options.headers['Cookie'] = req.headers['cookie'];
+    // }
     var reqData = req.data || req.query || req.body;
     if (setting.method == "GET") {
         httpUtils.get(options, reqData, callback);

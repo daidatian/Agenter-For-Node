@@ -7,8 +7,8 @@
   <body>
     <div class = "container">
         <%
-            var list = json?json.data.categoryList:[];
-            var list2 = json2?json2.data.categoryList:[];
+            var list = (json&&json.data&&json.data.categoryList)||[];
+            var list2 = (json2&&json2.data&&json2.data.categoryList)||[];
             var nullMsg = '暂无数据';
         %>
         <div class="table-responsive">

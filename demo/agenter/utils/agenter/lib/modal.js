@@ -38,24 +38,20 @@ var M = function(cacheId, req, setting, callback) {
 		var singleSetting = readApi.getApiSettingById(apiId);
 		if (singleSetting.read) {
 			(function(j) {
-				var reqData = {
-					data: setting.data || (setting.length ? setting[j].data : undefined),
-					headers: {
-						cookie: req.headers.cookie,
-					}
-				};
+				var reqData = req;
+				reqData.data = setting.data || (setting.length ? setting[j].data : undefined);
 				transfer(singleSetting, reqData, function(d) {
 					if (!setting.length) { // 一个接口请求
-						if (typeof(d) == 'string' && (d.indexOf('{') != 0 && d.indexOf('[') != 0)) { // 如果接口请求失败(返回的信息不是一个json对象字符串)则返回空
-							callback('');
+						if (typeof(d) == 'string' && (d.indexOf('{') != 0 && d.indexOf('[') != 0)) { // 如果接口请求失败(返回的信息不是一个json对象字符串)则返回空对象
+							callback({});
 							return;
 						}
 						callback(JSON.parse(d)); // 转为json对象返回
 						!cacheBol || Memcache.setMemcache(cacheId, JSON.parse(d)); // 设置缓存
 						return;
 					} else { // 多个接口请求
-						if (typeof(d) == 'string' && (d.indexOf('{') != 0 && d.indexOf('[') != 0)) { // 如果接口请求失败(返回的信息不是一个json对象字符串)则返回空
-							data[j] = '';
+						if (typeof(d) == 'string' && (d.indexOf('{') != 0 && d.indexOf('[') != 0)) { // 如果接口请求失败(返回的信息不是一个json对象字符串)则返回空对象
+							data[j] = {};
 						} else {
 							data[j] = JSON.parse(d);
 						}

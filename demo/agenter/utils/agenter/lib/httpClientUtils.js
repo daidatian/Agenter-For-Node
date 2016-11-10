@@ -8,14 +8,28 @@ var http = require('http');
 var url = require('url');
 
 /**
+ * http参数headers属性过滤函数
+ * @param  {[type]} headers [description]
+ * @return {[type]}         [description]
+ */
+var filterHeaders = function(headers){
+    var filterProps = ['host', 'accept-encoding']; // 需过滤的属性数组
+    for (var i=0, prop; prop = filterProps[i++];) {
+        if (headers[prop]) {
+            delete headers[prop];
+        }
+    }
+};
+
+/**
  * http请求参数过滤函数
  * @param  {string} type 协议类型
  * @param  {object} ops  参数对象
  * @return {object}      新的参数对象
  */
 var filterParam = function(type, ops){
-    var httpArr = ['host', 'port', 'path', 'method'];
-    var httpsArr = ['hostname', 'port', 'path', 'method'];
+    var httpArr = ['host', 'port', 'path', 'method', 'headers'];
+    var httpsArr = ['hostname', 'port', 'path', 'method', 'headers'];
     var options = {};
     if (type == 'http') {
         for (var i in ops) {
@@ -26,7 +40,6 @@ var filterParam = function(type, ops){
                 }
             }
         }
-        return options;
     } else if (type == 'https') {
         for (var i in ops) {
             var httpsArrSize = httpsArr.length;
@@ -36,14 +49,16 @@ var filterParam = function(type, ops){
                 }
             }
         }
-        return options;
     }
+    filterHeaders(options.headers);
+    return options;
 };
+
 
 module.exports = {
     /**
      * http get请求方法
-     * @param  {object}   ops        请求体
+     * @param  {object}   ops        请求体/请求链接
      * @param  {string}   optionData 请求参数对象
      * @param  {Function} callback   回调函数
      * @return {string}              返回的的数据字符串

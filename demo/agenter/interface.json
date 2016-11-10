@@ -20,7 +20,7 @@
     "interfaces": [
         {
             "config": "tb_http",
-            "method": "GET", 
+            "method": "POST", 
             "description": "主搜索接口",
             "action": "/client/search.do",
             "localAction": "/client/search.do",
@@ -30,14 +30,14 @@
             "monitor": false
         }, {
             "config": "tb_https",
-            "method": "GET", 
+            "method": "POST", 
             "description": "主搜索接口",
             "action": "/client/search.do",
             "localAction": "/client/search.dos",
             "id": "Search.getItems2",
             "type": "JSON",
             "sendMode": "setCkMode",
-            "monitor": true
+            "monitor": false
         }
     ]
 }

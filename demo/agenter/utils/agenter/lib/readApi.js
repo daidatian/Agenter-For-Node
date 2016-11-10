@@ -15,7 +15,10 @@ readApi.init = function(apis){
  * @param inter {object} 单个接口配置对象
  */
 readApi.getApiSetting = function(inter) {
-	var setting = inter;
+	var setting = {};
+	for (var i in inter) {
+		setting[i] = inter[i];
+	}
 	var config = inter.config || 'default'; // host/port设置，默认default
 	setting.protocol = interfaces.config[config].protocol || 'http'; // 接口协议(http/https，默认为http)
 	setting.protocol = setting.protocol.toLowerCase();

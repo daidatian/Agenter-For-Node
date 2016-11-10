@@ -1,5 +1,5 @@
 /*!
- * agenter
+ * transmd
  * by ddt 20160718
  */
 
@@ -11,50 +11,50 @@ var cacheModal = require('./lib/cacheModal');
 var transfer = require('./lib/transfer');
 var readApi = require('./lib/readApi');
 
-var agenter = {};
+var transmd = {};
 
 /**
  * 初始化接口文档路径配置
  * @param {object} apis require接口文档引入对象
  */
-agenter.init = function(apis){
+transmd.init = function(apis){
 	readApi.init(apis);
 };
 
 /**
  * 后台渲染
  */
-agenter.Model = function(){
+transmd.Model = function(){
 	return model;
 };
 
 /**
  * 接口配置
  */
-agenter.TransApi = function(){
+transmd.TransApi = function(){
 	return transApi;
 };
 
 /**
  * 页面数据缓存
  */
-agenter.CacheModal = function(){
+transmd.CacheModal = function(){
 	return cacheModal;
 };
 
 /**
  * 请求接口数据
  */
-agenter.Transfer = function(){
+transmd.Transfer = function(){
 	return transfer;
 };
 
 /**
  * 读取接口数据
  */
-agenter.ReadApi = function(){
+transmd.ReadApi = function(){
 	return readApi;
 };
 
 
-module.exports = agenter;
+module.exports = transmd;
